@@ -1,0 +1,32 @@
+{
+  "name": "hsm2eth",
+  "version": "1.0.0",
+  "description": "Use HSM to sign ethereum transaction",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wshbair/HSM2ETH.git"
+  },
+  "keywords": [
+    "hsm",
+    "ethereum"
+  ],
+  "author": "Wazen Shbair",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wshbair/HSM2ETH/issues"
+  },
+  "homepage": "https://github.com/wshbair/HSM2ETH#readme",
+  "dependencies": {
+    "bignumber.js": "^9.0.0",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^6.2.0",
+    "graphene-pk11": "^2.1.6",
+    "js-sha3": "^0.8.0",
+    "web3": "^1.2.6"
+  }
+}
