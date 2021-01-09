@@ -1,4 +1,4 @@
-# HSM2ETH
+# SoftHSMv2 for Ethereum key generation and transactions signing 
 Use HSM to sign ethereum transaction
 
 Based on the steps given in [ethereum stackexchange question](https://ethereum.stackexchange.com/questions/73192/using-aws-cloudhsm-to-sign-transactions 
