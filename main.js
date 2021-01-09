@@ -1,3 +1,7 @@
+// Developed by Wazen SHBAIR
+// Research associate in University of Luxembourg
+// wazen.shbair@gmail.com
+
 var graphene = require("graphene-pk11");
 var util = require('ethereumjs-util')
 const keccak256 = require('js-sha3').keccak256;
