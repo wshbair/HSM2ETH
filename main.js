@@ -64,7 +64,7 @@ if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
         var tempsig = sign.once(msgHash)
         ss = tempsig.slice(32,64)
         s_value = new BigNumber(ss.toString('hex'), 16);
-        secp256k1N = new BigNumber("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16)
+        secp256k1N = new BigNumber("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16) // max value on the curve
         secp256k1halfN = secp256k1N.dividedBy(new BigNumber(2))
         if (s_value.isLessThan(secp256k1halfN))
             flag=false
