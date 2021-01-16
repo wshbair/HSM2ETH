@@ -52,8 +52,9 @@ if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
     const buf2 = Buffer.from(address, 'hex');
     const EthAddr="0x"+buf2.slice(-20).toString('hex') // take lat 20 bytes as ethereum adress
     console.log("Generated Ethreum address:" + EthAddr) 
-
-    //First sign : sign the ethreum address of the sender 
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //First sign : sign the ethreum address of the sender
+    ////////////////////////////////////////////////////////////////////////////////////////////
     encoded_msg = EthAddr 
     var msgHash = util.keccak(encoded_msg) // msg to be signed is the generated ethereum address
     addressSign = calculateEthereumSig(msgHash,EthAddr,keys.privateKey)
@@ -73,7 +74,9 @@ if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
 
     const tx = new EthereumTx(txParams, {'chain':'rinkeby'})
     var msgHash = tx.hash(false)
-    //Second sign: sign the raw transactions
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Second sign: sign the raw transactions, thanks for @lucashenning for discoving this step 
+    ////////////////////////////////////////////////////////////////////////////////////////////
     const txSig = calculateEthereumSig(msgHash,EthAddr, keys.privateKey)
     tx.r = txSig.r
     tx.s = txSig.s
