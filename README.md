@@ -1,4 +1,4 @@
-# HSM-based Key Management Solution forEthereum Blockchain 
+# HSM-based Key Management Solution for Ethereum Blockchain 
 Use HSM to generate and sign ethereum transaction
 
 Based on the steps given in [ethereum stackexchange question](https://ethereum.stackexchange.com/questions/73192/using-aws-cloudhsm-to-sign-transactions 
