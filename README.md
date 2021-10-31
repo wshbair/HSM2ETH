@@ -43,5 +43,14 @@ Use HSM to generate and sign Ethereum transaction
 [![IMAGE ALT TEXT HERE](demo.png)](https://www.youtube.com/watch?v=R0_-ZKoEGn8)
  
 ## Credit 
-Based on the steps given in [ethereum stackexchange question](https://ethereum.stackexchange.com/questions/73192/using-aws-cloudhsm-to-sign-transactions 
-) about using HSM to sign ethereum transactions.
+Based on the steps given in [ethereum stackexchange question](https://ethereum.stackexchange.com/questions/73192/using-aws-cloudhsm-to-sign-transactions) about using HSM to sign ethereum transactions.
+
+## Citation 
+````
+@inproceedings{shbair2021hsm,
+  title={HSM-based Key Management Solution for Ethereum Blockchain},
+  author={Shbair, Wazen and Gavrilov, Eugene and others},
+  booktitle={IEEE International Conference on Blockchain and Cryptocurrency, 3-6 May 2021},
+  year={2021}
+}
+````
