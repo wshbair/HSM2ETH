@@ -3,7 +3,7 @@ const fs = require('fs');
 var cors = require('cors')
 var bodyParser = require('body-parser')
 const Web3 = require('web3')
-const web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/d7a46824a4114bab88183f23154d6521"));
+const web3 = new Web3(new Web3.providers.HttpProvider("Geth Instance"));
 
 var compression = require('compression')
 
