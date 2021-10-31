@@ -4,9 +4,9 @@ Use HSM to generate and sign Ethereum transaction
 
 ### Built With
 
-
+* [SoftHSM](https://github.com/opendnssec/SoftHSMv2)
+* [Graphene](https://github.com/PeculiarVentures/graphene)
 * [Express - Node.js web application framework](https://expressjs.com)
-* [SoftHSM](https://www.opendnssec.org/softhsm/)
 * [Semantic UI](https://semantic-ui.com/)
 
 <!-- GETTING STARTED -->
@@ -45,6 +45,3 @@ Use HSM to generate and sign Ethereum transaction
 ## Credit 
 Based on the steps given in [ethereum stackexchange question](https://ethereum.stackexchange.com/questions/73192/using-aws-cloudhsm-to-sign-transactions 
 ) about using HSM to sign ethereum transactions.
-
-
-I open source the implementation using [SoftHSM](https://github.com/opendnssec/SoftHSMv2) and [Graphene](https://github.com/PeculiarVentures/graphene).
