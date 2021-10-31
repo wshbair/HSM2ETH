@@ -1,0 +1,19 @@
+body {
+    padding: 10px;
+}
+
+.card {
+    width: 200px !important;
+}
+
+.icon {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card .image {
+    background: transparent !important;
+    width: 200px;
+    height: 200px;
+}

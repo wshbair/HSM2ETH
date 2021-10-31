@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tx Builder</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <link rel="icon" href="images\favicon.png">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="ui three column grid">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+            <img src="images/logo.png" />
+            <div class="ui inverted large menu">
+                <a href='/' class="item centred">Home</a>
+                <a href='/monitoring.html' class="item centred">List keys</a>
+                <a href='/generate_keys.html' class="item centred">Generate</a>
+                <a href='/tx_builder.html' class="item centred">Tx Builder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="ui three column grid">
+            <div class="three wide column">
+            </div>
+            <div class="ten wide column">
+                <div class="ui raised segment">
+                    <a class="ui purple left big ribbon label">
+                        <h4> Ethereum TX Builder and Signing </h4>
+                    </a>
+                    <div id="transactionSetup" class="ui inline loader"></div>
+                    <div id="SaveStep1_msg" class="ui message"></div>
+                    <h4 class="ui dividing header">Transaction Parameters</h4>
+                    <!-- Wallet address -->
+                    <div class="ui form">
+                        <div class="inline fields">
+                            <div class=" two wide field">
+                                <label>Wallet Address</label>
+                            </div>
+                            <div class="eight wide field">
+                                <input type="text" id="ethereumAddress" placeholder="Ethereum wallet address">
+                                <button class="ui button primary" onclick="lookup()">Lookup</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Public Key -->
+                    <div class="ui form">
+                        <div class="inline fields">
+                            <div class=" two wide field">
+                                <label>Related Public key</label>
+                            </div>
+                            <div class="ten wide field">
+                                <textarea rows="1" id="publickey" pellcheck="false" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nounce -->
+                    <div class="ui form">
+                        <div class="inline fields">
+                            <div class=" two wide field">
+                                <label>Nounce</label>
+                            </div>
+                            <div class="ten wide field">
+                                <input id="newNonce" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gas Price -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                                <label>Gas Price</label>
+                            </div>
+                            <div class="ten wide field ">
+                                <input type="text " value="0x0918400000 ">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gas Limit -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                                <label>Gas Limit</label>
+                            </div>
+                            <div class="ten wide field ">
+                                <input type="text " value="160000 ">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- To -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                                <label>To</label>
+                            </div>
+                            <div class="ten wide field ">
+                                <input type="text" id="toAddr" value="0x0000000000000000000000000000000000000000 ">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Value -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                                <label>Value</label>
+                            </div>
+                            <div class="ten wide field ">
+                                <input type="text" id="value" value="0x00 ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                            </div>
+                            <div class="ten wide field ">
+                                <button class="ui button primary " onclick="GenerateTX() "> Generate & Sign Tx</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Signed Transaction -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                                <label>Signed Transaction</label>
+                            </div>
+                            <div class="ten wide field ">
+                                <textarea rows="2" id="rawtx" pellcheck="false " disabled></textarea><br><br>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Signed Transaction -->
+                    <div class="ui form ">
+                        <div class="inline fields ">
+                            <div class=" two wide field ">
+                            </div>
+                            <div class="eight wide field ">
+                                <button class="ui button primary " onclick="SubmitTx() ">Submit Transaction to Network</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js "></script>
+    <link rel="stylesheet " href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css ">
+
+    <script src="js/tx-generate.js "></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HSM Key Generation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <link rel="icon" href="images\favicon.png">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="ui three column grid">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+            <img src="images/logo.png" />
+            <div class="ui inverted large menu">
+                <a href='/' class="item centred">Home</a>
+                <a href='/monitoring.html' class="item centred">List Keys</a>
+                <a href='/generate_keys.html' class="item centred">Generate</a>
+                <a href='/tx_builder.html' class="item centred">Tx Builder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="ui three column grid">
+            <div class="three wide column">
+            </div>
+            <div class="ten wide column">
+                <div class="ui raised segment">
+                    <a class="ui purple left big ribbon label">
+                        <h4> Ethereum Wallet Generation </h4>
+                    </a>
+                    <div id="transactionSetup" class="ui inline loader"></div>
+                    <br><br>
+                    <div id="SaveStep1_msg" class="ui message" style="display: none;"></div>
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Key Genration Mechanism</label>
+                            <select>
+                            <option value="">Select</option>
+                            <option value="1">ECDSA</option>
+                           </select>
+                        </div>
+                        <div class="ui input">
+                            <input type="text" id="keylbl" placeholder="Key label">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="ui button primary" onclick="GenetateKey()">Generate ECDSA key pair</button>
+                    <br>
+                    <br>
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Public Key</label>
+                            <textarea rows="3" id="publickey" pellcheck="false"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Related Ethereum Wallet Address</label>
+                            <input id="ethereum_address" type="text">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css">
+
+    <script src="js/keys-generate.js"></script>
+
+
+
+</body>
+
+</html>

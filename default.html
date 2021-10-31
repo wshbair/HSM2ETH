@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HSM-based Ethereum Key Management Solution </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <link rel="icon" href="images\favicon.png">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="ui three column grid">
+        <div class="three wide column">
+
+        </div>
+        <div class="ten wide column">
+            <img src="images/logo.png" />
+            <div class="ui inverted large menu">
+                <a href='/' class="item centred">Home</a>
+                <a href='/keyslist.html' class="item centred">Keys List</a>
+                <a href='/generate_keys.html' class="item centred">Generate Key</a>
+                <a href='/tx_builder.html' class="item centred">Tx Builder</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="ui three column grid">
+            <div class="three wide column">
+
+            </div>
+            <div class="ten wide column">
+                <img src="images/soft.jpeg" width="200" />
+                <h2> SoftHSM Specifications
+                </h2>
+                <!-- manufacturerID -->
+                <div class="ui form">
+                    <div class="inline fields">
+                        <div class=" two wide field">
+                            <label>Manufacturer ID</label>
+                        </div>
+                        <div class="eight wide field">
+                            <input id="manufacturerID" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+                <!-- slotDescription -->
+                <div class="ui form">
+                    <div class="inline fields">
+                        <div class=" two wide field">
+                            <label>Slot Description</label>
+                        </div>
+                        <div class="eight wide field">
+                            <input id="slotDescription" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+                <!-- Number of slots -->
+                <div class="ui form">
+                    <div class="inline fields">
+                        <div class=" two wide field">
+                            <label>Number of Slots</label>
+                        </div>
+                        <div class="eight wide field">
+                            <input type="text" id="slotLength" disabled>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mechanisms -->
+                <div class="ui form">
+                    <div class="inline fields">
+                        <div class=" two wide field">
+                            <label>Supported mechanisms</label>
+                        </div>
+                        <div class="eight wide field">
+                            <textarea rows="5" id="mechanisms" pellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class=" two field">
+
+                </div>
+                <div class="eight field">
+                    **EC_KEY_PAIR_GEN = 4160</div>
+
+            </div>
+        </div>
+        <div class="ui horizontal divider">
+
+        </div>
+        <div class="row ">
+            <div class="ui three column grid ">
+                <div class="three wide column ">
+                </div>
+                <div class="ten wide centred column ">
+                    <hr>
+                    <p>
+                        <div class="ui red horizontal label">Built for: </div> Wazen M. Shbair, Eugene Gavrilov, Radu State, HSM-based Key Management Solution for Ethereum Blockchain, ICBC2021 Demo session, May 2021
+                        <br><br>
+                        <div class="ui gray horizontal label">Contact: </div> <a href="mailto: wazen.shbair@uni.lu">wazen.shbair@uni.lu</a> , <a href="mailto: wazen.shbair@gmail.com">wazen.shbair@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js "></script>
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.js "></script>
+        <link rel="stylesheet " href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.8/calendar.min.css ">
+
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/softhsm/specs",
+                    success: function(result) {
+                        console.log(result)
+                        $('#manufacturerID').val(result.manufacturerID)
+                        $('#slotDescription').val(result.slotDescription)
+                        $('#slotLength').val(result.slotLength)
+                        $('#mechanisms').val(result.mechanisms.innerItems)
+                    },
+                    complete: function() {}
+                })
+            })
+        </script>
+</body>
+
+</html>
