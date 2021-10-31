@@ -1,5 +1,6 @@
-# HSM-based Key Management 
-Use HSM to generate and sign ethereum transaction
+![alt text](logo.png)
+# HSM-based Ethereum Key Management Solution
+Use HSM to generate and sign Ethereum transaction
 
  
 ## Credit 
