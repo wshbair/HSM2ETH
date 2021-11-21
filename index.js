@@ -1,33 +1,32 @@
 const express = require("express");
 const fs = require("fs");
-var cors = require("cors");
-var bodyParser = require("body-parser");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const Web3 = require("web3");
 const web3 = new Web3(new Web3.providers.HttpProvider("Geth Instance"));
 
-var compression = require("compression");
+const compression = require("compression");
 
 const { spawn } = require("child_process");
-var graphene = require("graphene-pk11");
+const graphene = require("graphene-pk11");
 //var util = require('ethereumjs-util')
 const keccak256 = require("js-sha3").keccak256;
 const EthereumTx = require("ethereumjs-tx").Transaction;
 const BigNumber = require("bignumber.js");
-var util = require("ethereumjs-util");
+const util = require("ethereumjs-util");
 
 // HSM Module Config
-var Module = graphene.Module;
-var lib = "/usr/local/lib/softhsm/libsofthsm2.so"; //linux
+const Module = graphene.Module;
+const lib = "/usr/local/lib/softhsm/libsofthsm2.so"; //linux
 //var lib ="D:/SoftHSM2/lib/softhsm2-x64.dll" //windows
-var mod = Module.load(lib, "SoftHSM");
+const mod = Module.load(lib, "SoftHSM");
 mod.initialize();
-var slot = mod.getSlots(0);
+const slot = mod.getSlots(0);
 const session = slot.open(
   graphene.SessionFlag.RW_SESSION | graphene.SessionFlag.SERIAL_SESSION
 );
 session.login("12345");
 
-var myIndex;
 //--------------------------------------------------------------
 // Express server configuration
 //--------------------------------------------------------------
@@ -63,7 +62,7 @@ app.get("/keyslist.html", (req, res) =>
 app.get("/api/keys/all", function (req, res) {
   EtherAddress = [];
   if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
-    var keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
+    const keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
     for (i = 0; i < keys.length; i++) {
       try {
         puplicKey = decodeECPointToPublicKey(
@@ -72,10 +71,10 @@ app.get("/api/keys/all", function (req, res) {
         pkstr = keys
           .items(i)
           .getAttribute({ keyGenMechanism: null }).keyGenMechanism;
-        var address = util.keccak256(puplicKey); // keccak256 hash of publicKey
-        var buf2 = Buffer.from(address, "hex");
-        var EthAddr = "0x" + buf2.slice(-20).toString("hex"); // take lat 20 bytes as ethereum adress
-        var label = keys.items(i).getAttribute({ label: null }).label;
+          const address = util.keccak256(puplicKey); // keccak256 hash of publicKey
+          const buf2 = Buffer.from(address, "hex");
+          const EthAddr = "0x" + buf2.slice(-20).toString("hex"); // take lat 20 bytes as ethereum adress
+          const label = keys.items(i).getAttribute({ label: null }).label;
         EtherAddress.push({ EthAddr, pkstr, label });
       } catch (e) {
         //console.log(e)
@@ -87,11 +86,11 @@ app.get("/api/keys/all", function (req, res) {
 
 app.post("/api/keys/generate", function (req, res) {
   keylabel = req.body.keylabel;
-  var ID = function () {
+  const ID = function () {
     return Math.random().toString(36).substr(2, 9);
   };
   // generate ECDSA key pair
-  var gkeys = session.generateKeyPair(
+  const gkeys = session.generateKeyPair(
     graphene.KeyGenMechanism.ECDSA,
     {
       label: keylabel,
@@ -130,16 +129,16 @@ app.get("/api/softhsm/specs", function (req, res) {
 app.post("/api/keys/getpublickey", function (req, res) {
   ethereumAddress = req.body.ethereumAddress;
   if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
-    var keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
-    var pkstr = "Not Founded";
+    const keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
+    const pkstr = "Not Founded";
     for (i = 0; i < keys.length; i++) {
       try {
         puplicKey = decodeECPointToPublicKey(
           keys.items(i).getAttribute({ pointEC: null }).pointEC
         );
-        var address = util.keccak256(puplicKey); // keccak256 hash of publicKey
-        var buf2 = Buffer.from(address, "hex");
-        var EthAddr = "0x" + buf2.slice(-20).toString("hex"); // take lat 20 bytes as ethereum adress
+        const address = util.keccak256(puplicKey); // keccak256 hash of publicKey
+        const buf2 = Buffer.from(address, "hex");
+        const EthAddr = "0x" + buf2.slice(-20).toString("hex"); // take lat 20 bytes as ethereum adress
         console.log(keys.items(i).getAttribute({ label: null }).label);
         if (EthAddr == ethereumAddress) {
           pkstr = puplicKey.toString("hex");
@@ -162,7 +161,7 @@ app.post("/api/tx/generator", function (req, res) {
   value = req.body.value;
 
   //Get the Private key
-  var allPkeys = session.find({ class: graphene.ObjectClass.PRIVATE_KEY });
+  const allPkeys = session.find({ class: graphene.ObjectClass.PRIVATE_KEY });
   for (i = 0; i < allPkeys.length; i++) {
     if (
       allPkeys.items(i).getAttribute({ label: null }).label == "EthreAddrees1"
@@ -174,7 +173,7 @@ app.post("/api/tx/generator", function (req, res) {
 
   //First sign : sign the ethreum address of the sender
   encoded_msg = EthAddr;
-  var msgHash = util.keccak(encoded_msg); // msg to be signed is the generated ethereum address
+  let msgHash = util.keccak(encoded_msg); // msg to be signed is the generated ethereum address
   addressSign = calculateEthereumSig(msgHash, EthAddr, Pkeys);
 
   //using the r,s,v value from the first signautre in the transaction parameter
@@ -190,7 +189,7 @@ app.post("/api/tx/generator", function (req, res) {
     v: addressSign.v,
   };
   const tx = new EthereumTx(txParams, { chain: "rinkeby" });
-  var msgHash = tx.hash(false);
+  msgHash = tx.hash(false);
 
   //Second sign: sign the raw transactions
   const txSig = calculateEthereumSig(msgHash, EthAddr, Pkeys);
@@ -216,7 +215,7 @@ app.post("/api/tx/submit", function (req, res) {
     .on("error", console.error);
 });
 
-function decodeECPointToPublicKey(data) {
+const decodeECPointToPublicKey = (data) => {
   if (data.length === 0 || data[0] !== 4) {
     throw new Error("Only uncompressed point format supported");
   }
@@ -227,14 +226,14 @@ function decodeECPointToPublicKey(data) {
   return data.slice(3, 67);
 }
 
-function calculateEthereumSig(msgHash, EthreAddr, privateKey) {
+const calculateEthereumSig = (msgHash, EthreAddr, privateKey) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // Contiue Signing until find s < (secp256k1.size/2)
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  var flag = true;
+  const flag = true;
   while (flag) {
-    var sign = session.createSign("ECDSA", privateKey);
-    var tempsig = sign.once(msgHash);
+    const sign = session.createSign("ECDSA", privateKey);
+    const tempsig = sign.once(msgHash);
     ss = tempsig.slice(32, 64);
     s_value = new BigNumber(ss.toString("hex"), 16);
     secp256k1N = new BigNumber(
@@ -249,10 +248,10 @@ function calculateEthereumSig(msgHash, EthreAddr, privateKey) {
     r: tempsig.slice(0, 32),
     s: tempsig.slice(32, 64),
   };
-  var v = 27;
-  var pubKey = util.ecrecover(util.toBuffer(msgHash), v, rs.r, rs.s);
-  var addrBuf = util.pubToAddress(pubKey);
-  var RecoveredEthAddr = util.bufferToHex(addrBuf);
+  let v = 27;
+  let pubKey = util.ecrecover(util.toBuffer(msgHash), v, rs.r, rs.s);
+  let addrBuf = util.pubToAddress(pubKey);
+  let RecoveredEthAddr = util.bufferToHex(addrBuf);
 
   if (EthreAddr != RecoveredEthAddr) {
     v = 28;
