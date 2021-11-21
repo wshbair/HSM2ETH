@@ -7,8 +7,6 @@ const web3 = new Web3(new Web3.providers.HttpProvider("Geth Instance"));
 
 var compression = require("compression");
 
-var sha1 = require("sha1");
-
 const { spawn } = require("child_process");
 var graphene = require("graphene-pk11");
 //var util = require('ethereumjs-util')
