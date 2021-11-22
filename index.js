@@ -59,7 +59,7 @@ app.get("/keyslist.html", (req, res) =>
 );
 
 // Get keys list
-app.get("/api/keys/all", function (req, res) {
+app.get("/api/keys/all", (req, res) => {
   EtherAddress = [];
   if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
     const keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
@@ -77,7 +77,7 @@ app.get("/api/keys/all", function (req, res) {
           const label = keys.items(i).getAttribute({ label: null }).label;
         EtherAddress.push({ EthAddr, pkstr, label });
       } catch (e) {
-        //console.log(e)
+        console.log(e)
       }
     }
     res.json(EtherAddress);
@@ -118,7 +118,7 @@ app.post("/api/keys/generate", (req, res) => {
   res.json({ EthAddr, pkstr });
 });
 
-app.get("/api/softhsm/specs", function (req, res) {
+app.get("/api/softhsm/specs", (req, res) => {
   slotLength = mod.getSlots().length;
   mechanisms = slot.getMechanisms();
   manufacturerID = slot.manufacturerID;
@@ -126,7 +126,7 @@ app.get("/api/softhsm/specs", function (req, res) {
   res.json({ slotLength, mechanisms, manufacturerID, slotDescription });
 });
 
-app.post("/api/keys/getpublickey", function (req, res) {
+app.post("/api/keys/getpublickey", (req, res) => {
   ethereumAddress = req.body.ethereumAddress;
   if (slot.flags & graphene.SlotFlag.TOKEN_PRESENT) {
     const keys = session.find({ class: graphene.ObjectClass.PUBLIC_KEY });
@@ -154,7 +154,7 @@ app.post("/api/keys/getpublickey", function (req, res) {
   });
 });
 
-app.post("/api/tx/generator", function (req, res) {
+app.post("/api/tx/generator", (req, res) => {
   EthAddr = req.body.ethereumAddress;
   newNonce = req.body.newNonce;
   toAddr = req.body.toAddr.trim();
@@ -201,7 +201,7 @@ app.post("/api/tx/generator", function (req, res) {
   res.json({ serializedTx });
 });
 
-app.post("/api/tx/submit", function (req, res) {
+app.post("/api/tx/submit", (req, res) => {
   rawTx = req.body.rawtx;
 
   // Transaction ready for submission
