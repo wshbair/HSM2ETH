@@ -84,9 +84,9 @@ app.get("/api/keys/all", function (req, res) {
   }
 });
 
-app.post("/api/keys/generate", function (req, res) {
-  keylabel = req.body.keylabel;
-  const ID = function () {
+app.post("/api/keys/generate", (req, res) => {
+  const keylabel = req.body.keylabel;
+  const ID = () => {
     return Math.random().toString(36).substr(2, 9);
   };
   // generate ECDSA key pair
