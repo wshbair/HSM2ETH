@@ -26,7 +26,7 @@ Use HSM to generate and sign Ethereum transaction
    ```sh
    npm install
    ```
-4. Set the Web3 providerin `index.js`
+4. Set the Web3 provider in `index.js`
    ```js
    const web3 = new Web3(new Web3.providers.HttpProvider("YOUR GETH Instance"));
 
