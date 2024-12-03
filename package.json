@@ -22,7 +22,7 @@
     "ethereumjs-wallet": "^1.0.0",
     "express": "^4.17.1",
     "graphene-pk11": "^2.3.0",
-    "mongoose": "^5.7.5",
+    "mongoose": "^8.8.3",
     "node-reel": "^1.0.12",
     "nodemon": "^2.0.2",
     "required": "^1.0.0",
